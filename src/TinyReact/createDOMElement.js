@@ -13,6 +13,7 @@ export default function createDOMElement(virtualDOM) {
         // 给节点添加属性
         updateNodeElement(newElement,virtualDOM)
     }
+    newElement._virtualDOM = virtualDOM
 
     // 递归创建子节点
     virtualDOM.children.forEach(child=>{
