@@ -1,5 +1,6 @@
 import createDOMElement from './createDOMElement'
 import mountElement from './mountElement'
+import unmountNode from './unmountNode'
 import updateNodeElement from './updateNodeElement'
 import updateTextNode from './updateTextNode'
 export default function diff(virtualDOM,container,oldDOM) {
@@ -19,10 +20,19 @@ export default function diff(virtualDOM,container,oldDOM) {
             // 更新元素属性
             updateNodeElement(oldDOM,virtualDOM,oldVirtualDOM)
         }
-
+        // 对比子节点
         virtualDOM.children.forEach((child,i)=>{
             diff(child,oldDOM,oldDOM.childNodes[i])
         })
+        // 删除节点
+        // 获取旧节点
+        let oldChildNodes = oldDOM.childNodes
+        // 对比新旧节点的数量
+        if(oldChildNodes.length > virtualDOM.children.length){
+            for(let i = oldChildNodes.length-1;i>virtualDOM.children.length-1;i--){
+                unmountNode(oldChildNodes[i])
+            }
+        }
     }
     
 }
