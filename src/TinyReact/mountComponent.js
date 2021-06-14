@@ -12,7 +12,10 @@ function buildFunctionComponent(virtualDOM) {
 
 function buildClassComponent(virtualDOM) {
     const component = new virtualDOM.type(virtualDOM.props)
-    return component.render()
+    const nextVirtualDOM = component.render()
+    // 把组件的实例挂在到虚拟dom上
+    nextVirtualDOM.component = component
+    return nextVirtualDOM
 }
 
 export default function mountComponent(virtualDOM,container) {

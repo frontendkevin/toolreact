@@ -50,19 +50,31 @@ function Heart() {
 class Alert extends TinyReact.Component {
   constructor(props) {
     super(props)
+    this.state= {
+      title:'title'
+    }
+    this.handleClick = this.handleClick.bind(this)
+  }
+  handleClick(){
+    this.setState({title:'changed title'})
   }
   render() {
-    return <div>{this.props.name}{this.props.age}</div>
+    return (
+      <div>
+        <span>{this.state.title}</span>
+        <button onClick={this.handleClick}>click</button>
+      </div>
+    )
   }
 }
 
 const root = document.getElementById('root')
 
-TinyReact.render(virtualDOM, root)
+TinyReact.render(<Alert/>, root)
 
-setTimeout(()=>{
-  TinyReact.render(modifyDOM,root)
-},2000)
+// setTimeout(()=>{
+//   TinyReact.render(modifyDOM,root)
+// },2000)
 
 
 
