@@ -15,6 +15,7 @@ const virtualDOM = (
     <span>这是一段内容</span>
     <button onClick={() => alert("你好")}>点击我</button>
     <h3>这个将会被删除</h3>
+    <h4>普通节点类型不同</h4>
     2, 3
     <input type="text" value="13" />
   </div>
@@ -33,6 +34,7 @@ const modifyDOM = (
     <span>这是一段修改过的内容</span>
     <button onClick={() => alert("你好!!!")}>点击我</button>
     <h3>这个将会被删除</h3>
+    <h5>普通节点类型不同</h5>
   2, 3
     <input type="text" value="13" />
   </div>
