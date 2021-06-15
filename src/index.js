@@ -68,13 +68,17 @@ class Alert extends TinyReact.Component {
   }
 }
 
+function NewComponent() {
+  return <span>new compoent</span>
+}
+
 const root = document.getElementById('root')
 
 TinyReact.render(<Alert/>, root)
 
-// setTimeout(()=>{
-//   TinyReact.render(modifyDOM,root)
-// },2000)
+setTimeout(()=>{
+  TinyReact.render(<NewComponent/>,root)
+},2000)
 
 
 

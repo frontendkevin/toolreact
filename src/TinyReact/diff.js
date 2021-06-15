@@ -1,10 +1,13 @@
 import createDOMElement from './createDOMElement'
+import diffComponent from './diffComponent'
 import mountElement from './mountElement'
 import unmountNode from './unmountNode'
 import updateNodeElement from './updateNodeElement'
 import updateTextNode from './updateTextNode'
 export default function diff(virtualDOM,container,oldDOM) {
+    // dom上挂载着虚拟dom, 虚拟dom上挂载着组件实例
     const oldVirtualDOM = oldDOM && oldDOM._virtualDOM
+    const oldComponent = oldVirtualDOM && oldVirtualDOM.component
     // 旧节点不存在
     if(!oldDOM){
         mountElement(virtualDOM,container)
@@ -12,6 +15,10 @@ export default function diff(virtualDOM,container,oldDOM) {
         // 节点type不同 并且不是组件
         const newElement = createDOMElement(virtualDOM)
         oldDOM.parentNode.replaceChild(newElement,oldDOM)
+    }else if(typeof virtualDOM.type === 'function'){
+        //组件类型 
+        diffComponent(virtualDOM,oldComponent,oldDOM,container)
+
     }else if( oldVirtualDOM && virtualDOM.type === oldVirtualDOM.type){
         if(virtualDOM.type==='text'){
             // 更新文本

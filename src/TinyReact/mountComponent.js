@@ -18,7 +18,7 @@ function buildClassComponent(virtualDOM) {
     return nextVirtualDOM
 }
 
-export default function mountComponent(virtualDOM,container) {
+export default function mountComponent(virtualDOM,container,oldDOM) {
     let nextVirtualDOM = null 
     if(isFunctionComponent(virtualDOM)){
         // function component
@@ -28,9 +28,9 @@ export default function mountComponent(virtualDOM,container) {
         nextVirtualDOM = buildClassComponent(virtualDOM)
     }
     if(isFunction(nextVirtualDOM)){
-        mountComponent(nextVirtualDOM,container)
+        mountComponent(nextVirtualDOM,container,oldDOM)
     }else{
-        mountNativeElement(nextVirtualDOM,container)
+        mountNativeElement(nextVirtualDOM,container,oldDOM)
     }
     
 }
